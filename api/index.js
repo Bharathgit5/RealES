@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRouter from './routes/user_route.js';
+import authRouter from './routes/auth_route.js'
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() =>{
     console.log('Connected to Mongodb');
@@ -16,3 +18,6 @@ app.listen(3000, () =>{
     //when there is a change here we always need to run again(node api/index.js)
     //instead we can use nodemon
 });
+
+app.use("/api/user", userRouter)
+app.use("/api/auth", authRouter)
