@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGO).then(() =>{
 
 
 const app = express();
-
+app.use(express.json());
 app.listen(3000, () =>{
     console.log('server is running  on port 3000!! nodemon is working');
     //when there is a change here we always need to run again(node api/index.js)
