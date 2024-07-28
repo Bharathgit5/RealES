@@ -27,7 +27,7 @@ const CreateListing = () => {
     setuploading(false)
           }).catch((err) => {
             setImageUploadError('Image upload failed (2 mb max per image)')
-            setuploading(false)
+            setuploading(false) 
           })
         } else{
             setImageUploadError('You can upload upto 6 images per listing')
