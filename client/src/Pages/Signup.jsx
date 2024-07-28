@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import OAuth from '../Components/OAuth';
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
   const [error,setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleChange =(e) =>{
    setFormData(
     {
@@ -30,15 +31,17 @@ const Signup = () => {
     const data = await res.json(); //instead of res.json() in replaced with res.text()
     console.log(data);
     if(data.success === false){
-      setError(data.message);
+      setError(data.message +  "please signin");
       setLoading(false);
       return;
     }
-    setLoading(false);z
+    setLoading(false);
+    setError(null)
+    navigate('/signin')
   }
   catch(error){
 setLoading(false);
-setError(error.message);
+setError(error.message );
   }
   };
 
