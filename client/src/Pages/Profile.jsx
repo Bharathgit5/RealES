@@ -118,13 +118,31 @@ const handleShowListings = async () =>{
   const res= await fetch(`api/user/listings/${currentUser._id}`);
    const data = await res.json();
    if(data.success === false){
-    setshowListingError(true);
+    setshowListingError(true );
     return;
    }
    setUserListings(data);
   }catch(error){
-setshowListingError(true)
+setshowListingError(true )
   }
+}
+
+const handleListingDelete= async(listingId) =>{
+   try{
+ const res= await fetch(`/api/listing/delete/${listingId}`,{
+  method:'DELETE', 
+ });
+ const data = await res.json();
+ if(data.success === false){
+  console.log(data.message + "No listings");
+  return;
+ }
+setUserListings((prev) =>
+   prev.filter((listing)=> listingId !== listingId));
+
+   }catch(error){
+    console.log(error.message + "No listings")
+   }
 }
  
   return (
@@ -168,7 +186,7 @@ setshowListingError(true)
 <p className='text-red-700 mt-5'>{error ? error: ''}</p>
 <p className='text-green-500 mt-5'>{updateSuccess ? 'Success' : ''} </p>
 <button onClick={handleShowListings} className='text-green-700 w-full '>Show Listings</button>
-<p className='text-red-500 mt-5 '>{showListingError ? 'Error showing listings':''}</p>
+<p className='text-red-500 mt-5 '>{showListingError ? 'Error : No Listings':''}</p>
 {userListings && userListings.length > 0 && 
 <div className='flex flex-col gap-4'>
   <h1 className='text-center mt-7 text-2xl font-semibold'>Your Listings</h1>
@@ -184,8 +202,10 @@ setshowListingError(true)
     </Link>
 
 <div className='flex flex-col item-center'>
-<button className='text-red-700'>Delete</button>
+<button onClick={() =>handleListingDelete(listing._id)} className='text-red-700'>Delete</button>
+<Link to={`/update-listing/${listing._id}`}>
 <button className='text-green-700'>Edit</button>
+</Link>
 
 </div>
 
