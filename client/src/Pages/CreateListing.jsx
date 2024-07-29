@@ -15,7 +15,7 @@ const CreateListing = () => {
     name:'',
     description:'',
     address:'',
-    type:'rent',
+    type:'sell',
     bedrooms:1,
     bathrooms:1,
     regularPrice:10,
