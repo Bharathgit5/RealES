@@ -11,6 +11,10 @@ const listingSchema = new mongoose.Schema(
             required:true,
 
         },
+        address: {
+            type: String,
+            required: true,
+          },
         regularPrice:{
             type:Number,
             required:true,
